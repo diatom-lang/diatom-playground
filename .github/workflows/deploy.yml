@@ -1,0 +1,31 @@
+name: Deploy Playground
+
+on:
+  push:
+    branches: [ "master" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  Deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: wasm-pack-action
+      uses: jetli/wasm-pack-action@v0.4.0
+      
+    - name: build wasm
+      run: wasm-pack build --release --target web
+      
+    - name: deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages
+        publish_dir: .
+        force_orphan: true
+
