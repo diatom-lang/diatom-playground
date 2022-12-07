@@ -19,7 +19,7 @@ jobs:
       uses: jetli/wasm-pack-action@v0.4.0
       
     - name: build wasm
-      run: wasm-pack build --release --target web
+      run: wasm-pack build --release --target web && ls -a && tree
       
     - name: deploy
       uses: peaceiris/actions-gh-pages@v3
