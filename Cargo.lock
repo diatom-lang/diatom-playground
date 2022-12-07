@@ -134,8 +134,9 @@ checksum = "7a81dae078cea95a014a339291cec439d2f232ebe854a9d672b796c6afafa9b7"
 
 [[package]]
 name = "diatom"
-version = "0.2.2"
-source = "git+https://github.com/TerenceNg03/diatom#41e982236d0ce2c800eff587e2ad045d818ce947"
+version = "0.2.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5566ae7d933181ace4d9448c1367c2635a1fddb709cf677134fe2e8d04297807"
 dependencies = [
  "ahash",
  "clap",
