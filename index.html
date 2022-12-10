@@ -121,6 +121,20 @@
         html {
             font-size: 0.9vmax;
         }
+
+        pre {
+            white-space: -moz-pre-wrap;
+            /* Mozilla, supported since 1999 */
+            white-space: -pre-wrap;
+            /* Opera */
+            white-space: -o-pre-wrap;
+            /* Opera */
+            white-space: pre-wrap;
+            /* CSS3 - Text module (Candidate Recommendation) http://www.w3.org/TR/css3-text/#white-space */
+            word-wrap: break-word;
+            /* IE 5.5+ */
+        }
+
     </style>
 </head>
 
@@ -174,6 +188,17 @@
         var editor = ace.edit("code_area");
         editor.setTheme("ace/theme/solarized_light");
         editor.session.setMode("ace/mode/diatom");
+        editor.setShowPrintMargin(false);
+        editor.container.style.background = "#FAEBD7";
+        editor.setOption("wrap", true);
+
+        /*var output_editor = ace.edit("output_area");
+        output_editor.setTheme("ace/theme/solarized_light");
+        output_editor.session.setMode("ace/mode/diatom");
+        output_editor.setShowPrintMargin(false);
+        output_editor.setReadOnly(true);
+        output_editor.container.style.background = "#FAEBD7";
+        output_editor.setOption("wrap", true);*/
 
         // Load parameters
         let param = (new URL(window.location.href)).searchParams.get("code");
@@ -187,7 +212,19 @@
         document.getElementById("run_button").onclick = function () {
             let code = editor.getValue();
             let output = compile(code);
-            document.getElementById("output_area").innerHTML = output;
+            document.getElementById('output_area').innerHTML = output;
+            (function () {
+                var pre = document.getElementsByTagName('output_area'),
+                    pl = pre.length;
+                for (var i = 0; i < pl; i++) {
+                    pre[i].innerHTML = '<span class="line-number"></span>' + pre[i].innerHTML + '<span class="cl"></span>';
+                    var num = pre[i].innerHTML.split(/\n/).length;
+                    for (var j = 0; j < num; j++) {
+                        var line_num = pre[i].getElementsByTagName('span')[0];
+                        line_num.innerHTML += '<span>' + (j + 1) + '</span>';
+                    }
+                }
+            })();
         };
 
         // On share link
@@ -197,23 +234,14 @@
         }
 
         // Resize editor
-        $(".left").resizable({
-            handleSelector: ".splitter",
-            resizeHeight: false
+        $("#left").resizable({
+            handleSelector: "#splitter",
+            resizeHeight: false,
         });
 
-        let set_height = function () {
-            let rh = $(".right")[0].clientHeight;
-            let hh = $("#header")[0].offsetHeight;
-            let rh_new = window.innerHeight - rh - hh;
-            $("#output_area").height(rh_new);
-            $("#code_container")[0].style.height = $("#output_area")[0].style.height;
-        };
-        $( window ).resize(set_height);
-        set_height();
     </script>
-    <header class="p-3 text-bg-dark" id="header">
-        <div class="d-flex align-items-center flex-wrap px-5">
+    <header class="text-bg-dark" id="header">
+        <div class="d-flex align-items-center flex-wrap px-5" style="height: 5em;">
             <h1 class="text-warning ms-0" style="white-space: nowrap; font-size: 2.5rem;">Diatom Playground</h1>
             <div class="p-3 m-auto"></div>
             <div class="d-flex me-0">
@@ -265,10 +293,9 @@
     </header>
 
     <div class="d-flex adjust-content-stretch font-monospace m-0">
-        <div class="form-floating m-2 left d-inline-block" style="min-width: 30%; width: 50%;">
+        <div class="form-floating m-2 d-inline-block" id="left" style="min-width: 30%; width: 50%;">
             <div class="form-control" id="code_container" style="background-color: #FAEBD7; height: 100%;">
-                <div class="form-control h-100 overflow-scroll p-3" id="code_area"
-                    style="background-color: #FAEBD7; border: 0rem;">
+                <div class="form-control" id="code_area" style="border: 0rem; height: calc(100vh - 10rem) !important;">
                 </div>
             </div>
             <label for="code_area">Code Editor</label>
@@ -280,11 +307,13 @@
                         d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
                 </svg>Run</button>
         </div>
-        <div class="splitter d-inline-flex justify-content-center align-items-center text-center"
+        <div class="d-inline-flex justify-content-center align-items-center text-center" id="splitter"
             style="cursor: col-resize; font-size: 200%;">⣿</div>
-        <div class="form-floating m-2 right d-inline-block flex-grow-1" style="min-width: 20%;">
-            <div class="form-control text-left" id="output_area"
-                style="font-size: 90%; padding-top: 3rem; padding-left: 2rem; background-color: #FAEBD7; white-space: pre-wrap">
+        <div class="form-floating m-2 d-inline-block flex-grow-1" style="min-width: 30%; width: 50%;">
+            <div class="form-control" style="background-color: #FAEBD7; height: 100%;">
+                <pre class="form-control" id="output_area"
+                    style="border: 0rem; height: calc(100vh - 10rem) !important; background-color: #FAEBD7;">
+                </pre>
             </div>
             <label for="output_area">Interpreter Output</label>
         </div>
