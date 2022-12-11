@@ -29,7 +29,7 @@
             var DiatomHighlightRules = function () {
 
                 var keywords = (
-                    "where|until|end|if|then|else|elsif|case|in|for|do|assert|return|break|continue|loop|class|def|begin"
+                    "where|until|end|if|then|else|elsif|case|in|for|do|assert|return|break|continue|loop|class|def|begin|or|and|not"
                 );
 
                 var builtinConstants = ("true|false|nil");
@@ -192,20 +192,12 @@
         editor.container.style.background = "#FAEBD7";
         editor.setOption("wrap", true);
 
-        /*var output_editor = ace.edit("output_area");
-        output_editor.setTheme("ace/theme/solarized_light");
-        output_editor.session.setMode("ace/mode/diatom");
-        output_editor.setShowPrintMargin(false);
-        output_editor.setReadOnly(true);
-        output_editor.container.style.background = "#FAEBD7";
-        output_editor.setOption("wrap", true);*/
-
         // Load parameters
         let param = (new URL(window.location.href)).searchParams.get("code");
         if (param && param.length != 0) {
             editor.setValue(decodeURIComponent(param));
         } else {
-            editor.setValue("print 'Hello, world!'");
+            editor.setValue("print $ ('Hello, world!')");
         }
 
         // Run code
@@ -241,7 +233,7 @@
 
     </script>
     <header class="text-bg-dark" id="header">
-        <div class="d-flex align-items-center flex-wrap px-5" style="height: 5em;">
+        <div class="d-flex align-items-center flex-wrap" style="height: 5em; padding: 0rem 4rem 0rem 3rem;">
             <h1 class="text-warning ms-0" style="white-space: nowrap; font-size: 2.5rem;">Diatom Playground</h1>
             <div class="p-3 m-auto"></div>
             <div class="d-flex me-0">
