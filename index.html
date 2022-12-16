@@ -29,10 +29,10 @@
             var DiatomHighlightRules = function () {
 
                 var keywords = (
-                    "where|until|end|if|then|else|elsif|case|in|for|do|assert|return|break|continue|loop|class|def|begin|or|and|not"
+                    "where|until|end|if|then|else|elsif|case|of|in|for|do|assert|return|break|continue|loop|data|def|begin|or|and|not|require"
                 );
 
-                var builtinConstants = ("true|false|nil");
+                var builtinConstants = ("true|false|self");
 
                 var functions = (
                     // builtinFunctions
@@ -177,8 +177,11 @@
     </div>
 
     <script type="module">
-        import init, {compile} from "./pkg/diatom_playground.js";
-        init().then(() => {});
+        import init, {get_version, compile} from "./pkg/diatom_playground.js";
+        init().then(() => {
+            // set version
+            $("#version")[0].innerHTML = "v"+get_version();
+        });
         var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
         var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
             return new bootstrap.Popover(popoverTriggerEl)
@@ -197,7 +200,7 @@
         if (param && param.length != 0) {
             editor.setValue(decodeURIComponent(param));
         } else {
-            editor.setValue("print $ ('Hello, world!')");
+            editor.setValue("data Maybe = Just x | Nothing end");
         }
 
         // Run code
@@ -234,7 +237,8 @@
     </script>
     <header class="text-bg-dark" id="header">
         <div class="d-flex align-items-center flex-wrap" style="height: 5em; padding: 0rem 4rem 0rem 3rem;">
-            <h1 class="text-warning ms-0" style="white-space: nowrap; font-size: 2.5rem;">Diatom Playground</h1>
+            <h1 class="text-warning ms-0" style="white-space: nowrap; font-size: 2.5rem;">Diatom Playground <span
+                    class="badge bg-warning text-bg-light p-2" id="version">Unknown Version</span></h1>
             <div class="p-3 m-auto"></div>
             <div class="d-flex me-0">
                 <a href="https://github.com/diatom-lang/diatom.git">
