@@ -140,14 +140,15 @@ checksum = "7a81dae078cea95a014a339291cec439d2f232ebe854a9d672b796c6afafa9b7"
 
 [[package]]
 name = "diatom"
-version = "0.4.0"
+version = "0.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d95dc9d85311a9440c8aee84ad0bcade0d035b91071e02ae4e4637a604e16d97"
+checksum = "3aa28b7fa9b91f3cfb47c7b5e69359fdf610d2306b616890750b79e1eedd851e"
 dependencies = [
  "ahash",
  "bimap",
  "clap",
  "codespan-reporting",
+ "enum_dispatch",
  "lazy_static",
  "regex",
 ]
@@ -159,6 +160,18 @@ dependencies = [
  "ansi-to-html",
  "diatom",
  "wasm-bindgen",
+]
+
+[[package]]
+name = "enum_dispatch"
+version = "0.3.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "11f36e95862220b211a6e2aa5eca09b4fa391b13cd52ceb8035a24bf65a79de2"
+dependencies = [
+ "once_cell",
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
