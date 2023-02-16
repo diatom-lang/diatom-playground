@@ -91,9 +91,9 @@ checksum = "7a81dae078cea95a014a339291cec439d2f232ebe854a9d672b796c6afafa9b7"
 
 [[package]]
 name = "diatom"
-version = "0.4.6"
+version = "0.4.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d9d35307c03969ab9a32e272169b879da68cadcea195e5bbf7efcd7c8343a076"
+checksum = "f284ca045f25f8dc9af48ed5bc10bfa5081f9fb028908ce7b7f7d3fda9bd7cc8"
 dependencies = [
  "ahash",
  "bimap",
