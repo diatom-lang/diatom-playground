@@ -29,8 +29,8 @@ impl<'a> IoWrite for JsOutputStream<'a> {
 #[wasm_bindgen]
 pub fn exec(code: &str, f: &js_sys::Function) -> String {
     let stream = JsOutputStream { callback: f };
-    let mut interpreter = Interpreter::new(stream);
-    let result = match interpreter.exec(code, OsStr::new("<playground>"),true) {
+    let mut interpreter = Interpreter::with_color(stream);
+    let result = match interpreter.exec(code, OsStr::new("<playground>")) {
         Ok(_) => return String::new(),
         Err(s) => s,
     };
