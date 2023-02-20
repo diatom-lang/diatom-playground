@@ -64,7 +64,7 @@
                             regex: "(([0][Xx][_0-9a-fA-F]+)|([0][Bb][_0-1]+)|([0][Oo][_0-7]+))"
                         }, {
                             token: "constant.numeric",
-                            regex: "[0-9][_0-9]*[\\.]{0,1}((e|E)(|\\+|\\-)[_0-9]+){0,1}"
+                            regex: "[0-9][_0-9]*([\\.]((e|E)(|\\+|\\-)[_0-9]+)){0,1}"
                         }, {
                             token: keywordMapper,
                             regex: "[a-zA-Z_$][a-zA-Z0-9_$]*\\b"
@@ -200,7 +200,30 @@
         if (param && param.length != 0) {
             editor.setValue(decodeURIComponent(param));
         } else {
-            editor.setValue("println('Hello, diatom!')");
+            editor.setValue(`-- Example: Prime Number Sieve
+def sieve n = 
+    -- Create a list of [(0, true)], (1, true), ..]
+    list = (0..).take(n)
+        .map(fn x = (x, true))
+        .collect()
+   
+    for i in 2..n//2 do
+        if list[i].1 then
+            (2..).map(fn x = x*i)
+                .take_until(fn i = i >= n)
+                .for_each(fn x = begin list[x].1 = false end)
+        end
+    end
+    
+    list.iter().skip(2)
+        .filter(fn x = x.1)
+        .map(fn x = x.0)
+        .collect()
+end
+        
+n = 100
+println("All prime numbers within", n, "=")
+println(sieve(n))`);
         }
 
         // Run code
