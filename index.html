@@ -29,7 +29,7 @@
             var DiatomHighlightRules = function () {
 
                 var keywords = (
-                    "until|end|if|then|else|elsif|of|is|for|do|return|break|continue|loop|data|def|begin|or|and|not|require|in"
+                    "until|end|if|then|else|elsif|of|is|for|do|return|break|continue|loop|data|def|begin|or|and|not|require|in|fn"
                 );
 
                 var builtinConstants = ("true|false");
@@ -70,7 +70,7 @@
                             regex: "[a-zA-Z_$][a-zA-Z0-9_$]*\\b"
                         }, {
                             token: "keyword.operator",
-                            regex: "\\+|\\-|\\*|\\*\\*|\\/|%|<>|<|>|<=|=>|==|=|\\$|\\.\\."
+                            regex: "=|\\.\\."
                         }, {
                             token: "paren.lparen",
                             regex: "[\\[\\(\\{]"
