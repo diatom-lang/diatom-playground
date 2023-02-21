@@ -91,9 +91,9 @@ checksum = "7a81dae078cea95a014a339291cec439d2f232ebe854a9d672b796c6afafa9b7"
 
 [[package]]
 name = "diatom"
-version = "0.5.1"
+version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0122776f5ad102817907262b8a6dfd24145f88d83324d90e98bd667905de80fb"
+checksum = "ec0afd1ce918be856a2f237df4d69f1a5e316c02b19c3d2d5ebc63bb329f7cf8"
 dependencies = [
  "ahash",
  "bimap",
@@ -101,6 +101,7 @@ dependencies = [
  "either",
  "enum_dispatch",
  "lazy_static",
+ "more-asserts",
  "regex",
 ]
 
@@ -178,6 +179,12 @@ name = "memchr"
 version = "2.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2dffe52ecf27772e601905b7522cb4ef790d2cc203488bbd0e2fe85fcb74566d"
+
+[[package]]
+name = "more-asserts"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1fafa6961cabd9c63bcd77a45d7e3b7f3b552b70417831fb0f56db717e72407e"
 
 [[package]]
 name = "once_cell"
