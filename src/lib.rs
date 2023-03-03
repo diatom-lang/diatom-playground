@@ -30,7 +30,7 @@ impl<'a> IoWrite for JsOutputStream<'a> {
 pub fn exec(code: &str, f: &js_sys::Function) -> String {
     let stream = JsOutputStream { callback: f };
     let mut interpreter = Interpreter::with_color(stream);
-    let result = match interpreter.exec(code, OsStr::new("<playground>")) {
+    let result = match interpreter.exec(code, OsStr::new("<playground>"), true) {
         Ok(_) => return String::new(),
         Err(s) => s,
     };
